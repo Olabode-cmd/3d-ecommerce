@@ -38,7 +38,7 @@ export default function ARModelViewer({ product, onClose }: ARModelViewerProps) 
         dangerouslySetInnerHTML={{
           __html: `
             <model-viewer
-              src="${product.modelPath}"
+              src="${window.location.origin}${product.modelPath}"
               ar
               ar-modes="scene-viewer webxr quick-look"
               camera-controls
@@ -47,8 +47,11 @@ export default function ARModelViewer({ product, onClose }: ARModelViewerProps) 
               reveal="auto"
               auto-rotate
               shadow-intensity="1"
+              ar-scale="fixed"
               style="width: 100%; height: 100%; background-color: #6b7280;"
-              ios-src="${product.modelPath}"
+              ios-src="${window.location.origin}${product.modelPath}"
+              onerror="alert('Model loading error: ' + event.detail || 'Unknown error')"
+              onload="console.log('Model loaded successfully')"
             >
               <button 
                 slot="ar-button"
@@ -56,7 +59,23 @@ export default function ARModelViewer({ product, onClose }: ARModelViewerProps) 
               >
                 View in your space
               </button>
+              <div id="error-display" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,0,0,0.8); color: white; padding: 16px; border-radius: 8px; display: none; max-width: 80%; text-align: center;"></div>
             </model-viewer>
+            <script>
+              const modelViewer = document.querySelector('model-viewer');
+              const errorDisplay = document.getElementById('error-display');
+              
+              modelViewer.addEventListener('error', (event) => {
+                const errorMsg = 'AR Model Error: ' + (event.detail?.message || 'Failed to load model');
+                errorDisplay.textContent = errorMsg;
+                errorDisplay.style.display = 'block';
+                alert(errorMsg);
+              });
+              
+              modelViewer.addEventListener('load', () => {
+                errorDisplay.style.display = 'none';
+              });
+            </script>
           `
         }}
       />
