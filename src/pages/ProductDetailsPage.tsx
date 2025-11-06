@@ -27,12 +27,12 @@ export default function ProductDetailsPage() {
             <span className="text-sm text-gray-500 uppercase tracking-wide">{product.category}</span>
           </div>
           
-          <h1 className="text-4xl font-bold mb-4 text-gray-900">{product.name}</h1>
-          <p className="text-lg text-gray-600 mb-6 leading-relaxed">{product.description}</p>
+          <h1 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4 text-gray-900">{product.name}</h1>
+          <p className="text-base md:text-lg text-gray-600 mb-4 md:mb-6 leading-relaxed">{product.description}</p>
           
-          <div className="bg-gray-50 rounded-xl p-6 mb-6">
-            <h3 className="font-bold text-gray-900 mb-4">Specifications</h3>
-            <div className="grid grid-cols-2 gap-4 text-sm">
+          <div className="bg-gray-50 rounded-xl p-4 md:p-6 mb-4 md:mb-6">
+            <h3 className="text-base md:text-lg font-bold text-gray-900 mb-3 md:mb-4">Specifications</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 text-sm">
               <div>
                 <span className="text-gray-500">Material:</span>
                 <p className="font-medium text-gray-900">{product.material}</p>
@@ -52,8 +52,8 @@ export default function ProductDetailsPage() {
             </div>
           </div>
           
-          <div className="mb-6">
-            <h3 className="font-bold text-gray-900 mb-3">Key Features</h3>
+          <div className="mb-4 md:mb-6">
+            <h3 className="text-base md:text-lg font-bold text-gray-900 mb-2 md:mb-3">Key Features</h3>
             <ul className="space-y-2">
               {product.features.map((feature, index) => (
                 <li key={index} className="flex items-center text-gray-700">
@@ -64,9 +64,9 @@ export default function ProductDetailsPage() {
             </ul>
           </div>
           
-          <div className="border-t border-gray-200 pt-6">
-            <p className="text-3xl font-bold text-gray-900 mb-4">${product.price}</p>
-            <button className="w-full bg-gray-900 text-white py-4 px-6 rounded-xl font-semibold hover:bg-gray-800 transition-colors">
+          <div className="border-t border-gray-200 pt-4 md:pt-6">
+            <p className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 md:mb-4">${product.price}</p>
+            <button className="w-full bg-gray-900 text-white py-3 md:py-4 px-4 md:px-6 rounded-xl font-semibold hover:bg-gray-800 transition-colors">
               Add to Cart
             </button>
           </div>

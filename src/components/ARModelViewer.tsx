@@ -8,7 +8,7 @@ interface ARModelViewerProps {
 
 
 export default function ARModelViewer({ product, onClose }: ARModelViewerProps) {
-  const modelViewerRef = useRef<any>(null);
+  // const modelViewerRef = useRef<any>(null);
 
   useEffect(() => {
     // Import model-viewer script
@@ -18,15 +18,6 @@ export default function ARModelViewer({ product, onClose }: ARModelViewerProps) 
       script.src = 'https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js';
       document.head.appendChild(script);
     }
-
-    // Function to trigger AR when component mounts
-    const timer = setTimeout(() => {
-      if (modelViewerRef.current) {
-        modelViewerRef.current.activateAR();
-      }
-    }, 1000);
-
-    return () => clearTimeout(timer);
   }, []);
 
   // const scaleValue = Math.max(product.dimensions.width, product.dimensions.height, product.dimensions.depth) / 100;
@@ -43,7 +34,7 @@ export default function ARModelViewer({ product, onClose }: ARModelViewerProps) 
       </div>
       
       <div 
-        ref={modelViewerRef}
+        style={{ width: '100%', height: '100%' }}
         dangerouslySetInnerHTML={{
           __html: `
             <model-viewer
@@ -54,17 +45,17 @@ export default function ARModelViewer({ product, onClose }: ARModelViewerProps) 
               touch-action="pan-y"
               loading="eager"
               reveal="auto"
-              style="width: 100%; height: 100%; background-color: #000;"
+              auto-rotate
+              shadow-intensity="1"
+              style="width: 100%; height: 100%; background-color: #6b7280;"
               ios-src="${product.modelPath}"
             >
-              <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
-                <button 
-                  onclick="this.parentElement.parentElement.activateAR()"
-                  style="background: white; color: black; padding: 12px 24px; border-radius: 8px; border: none; font-weight: bold; font-size: 18px;"
-                >
-                  Tap to Start AR
-                </button>
-              </div>
+              <button 
+                slot="ar-button"
+                style="position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); background: white; color: black; padding: 16px 32px; border-radius: 12px; border: none; font-weight: bold; font-size: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);"
+              >
+                View in your space
+              </button>
             </model-viewer>
           `
         }}
