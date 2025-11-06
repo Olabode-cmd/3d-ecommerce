@@ -47,7 +47,7 @@ export default function ARModelViewer({ product, onClose }: ARModelViewerProps) 
         dangerouslySetInnerHTML={{
           __html: `
             <model-viewer
-              src="${window.location.origin}${product.modelPath}"
+              src="${product.modelPath}"
               ar
               ar-modes="scene-viewer webxr quick-look"
               camera-controls
@@ -55,7 +55,7 @@ export default function ARModelViewer({ product, onClose }: ARModelViewerProps) 
               loading="eager"
               reveal="auto"
               style="width: 100%; height: 100%; background-color: #000;"
-              ios-src="${window.location.origin}${product.modelPath}"
+              ios-src="${product.modelPath}"
             >
               <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
                 <button 

@@ -7,11 +7,11 @@ export const products: Product[] = [
     description: 'Comfortable modern arm chair with premium upholstery and ergonomic design.',
     price: 299.99,
     images: [
-      '/src/assets/images/product1/image1.png',
-      '/src/assets/images/product1/image2.png',
-      '/src/assets/images/product1/image3.png'
+      '/images/product1/image1.png',
+      '/images/product1/image2.png',
+      '/images/product1/image3.png'
     ],
-    modelPath: '/src/assets/images/product1/arm_chair__furniture.glb',
+    modelPath: '/images/product1/arm_chair__furniture.glb',
     category: 'Living Room',
     dimensions: { width: 32, height: 34, depth: 30 },
     weight: 25,
@@ -27,11 +27,11 @@ export const products: Product[] = [
     description: 'High-performance gaming chair with lumbar support and adjustable height.',
     price: 399.99,
     images: [
-      '/src/assets/images/product2/image1.png',
-      '/src/assets/images/product2/image2.png',
-      '/src/assets/images/product2/image3.png'
+      '/images/product2/image1.png',
+      '/images/product2/image2.png',
+      '/images/product2/image3.png'
     ],
-    modelPath: '/src/assets/images/product2/office_chair_gaming_chair.glb',
+    modelPath: '/images/product2/office_chair_gaming_chair.glb',
     category: 'Office',
     dimensions: { width: 28, height: 48, depth: 32 },
     weight: 35,
@@ -47,11 +47,11 @@ export const products: Product[] = [
     description: 'Professional executive chair with leather finish and premium comfort.',
     price: 499.99,
     images: [
-      '/src/assets/images/product3/image1.png',
-      '/src/assets/images/product3/image2.png',
-      '/src/assets/images/product3/image3.png'
+      '/images/product3/image1.png',
+      '/images/product3/image2.png',
+      '/images/product3/image3.png'
     ],
-    modelPath: '/src/assets/images/product3/office_chair_gaming_chair.glb',
+    modelPath: '/images/product3/office_chair_gaming_chair.glb',
     category: 'Office',
     dimensions: { width: 30, height: 46, depth: 34 },
     weight: 40,
@@ -67,11 +67,11 @@ export const products: Product[] = [
     description: 'Ergonomic task chair designed for long hours of comfortable work.',
     price: 349.99,
     images: [
-      '/src/assets/images/product4/image1.png',
-      '/src/assets/images/product4/image2.png',
-      '/src/assets/images/product4/image3.png'
+      '/images/product4/image1.png',
+      '/images/product4/image2.png',
+      '/images/product4/image3.png'
     ],
-    modelPath: '/src/assets/images/product4/office_chair_gaming_chair.glb',
+    modelPath: '/images/product4/office_chair_gaming_chair.glb',
     category: 'Office',
     dimensions: { width: 26, height: 42, depth: 28 },
     weight: 22,
