@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import { Product } from '../types/product';
+import { type Product } from '../types/product';
 import ChairModel from './ChairModel';
 
 interface Scene3DProps {

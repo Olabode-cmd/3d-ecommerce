@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Star } from 'lucide-react';
-import { Product } from '../types/product';
+import { type Product } from '../types/product';
 
 interface ProductCardProps {
   product: Product;
