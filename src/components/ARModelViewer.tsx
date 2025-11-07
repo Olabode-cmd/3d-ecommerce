@@ -54,7 +54,7 @@ export default function ARModelViewer({ product, onClose }: ARModelViewerProps) 
               onload="console.log('Model loaded successfully')"
             >
               <button 
-                slot="ar-button"
+                id="custom-ar-button"
                 style="position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); background: white; color: black; padding: 16px 32px; border-radius: 12px; border: none; font-weight: bold; font-size: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);"
               >
                 View in your space
@@ -64,6 +64,45 @@ export default function ARModelViewer({ product, onClose }: ARModelViewerProps) 
             <script>
               const modelViewer = document.querySelector('model-viewer');
               const errorDisplay = document.getElementById('error-display');
+              const arButton = document.getElementById('custom-ar-button');
+              
+              // Browser detection for AR support
+              function isARSupported() {
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+                const isAndroid = /Android/.test(navigator.userAgent);
+                const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+                const isChrome = /Chrome/.test(navigator.userAgent);
+                
+                return (isIOS && isSafari) || (isAndroid && isChrome);
+              }
+              
+              // Custom AR button click handler
+              arButton.addEventListener('click', () => {
+                if (!isARSupported()) {
+                  alert('AR is not supported on this browser. Please use:\n\n• Safari on iPhone/iPad\n• Chrome on Android\n\nMake sure you\'re using HTTPS.');
+                  return;
+                }
+                
+                // Try to activate AR
+                try {
+                  if (modelViewer.canActivateAR) {
+                    modelViewer.activateAR();
+                  } else {
+                    // Fallback: create download link for iOS
+                    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+                    if (isIOS) {
+                      const link = document.createElement('a');
+                      link.href = modelViewer.src;
+                      link.setAttribute('rel', 'ar');
+                      link.click();
+                    } else {
+                      alert('AR not available. Please ensure you have a compatible device and browser.');
+                    }
+                  }
+                } catch (error) {
+                  alert('AR activation failed: ' + error.message);
+                }
+              });
               
               modelViewer.addEventListener('error', (event) => {
                 const errorMsg = 'AR Model Error: ' + (event.detail?.message || 'Failed to load model');
