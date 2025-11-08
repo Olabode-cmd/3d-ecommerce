@@ -53,13 +53,21 @@ export default function ARModelViewer({ product, onClose }: ARModelViewerProps) 
               onerror="alert('Model loading error: ' + event.detail || 'Unknown error')"
               onload="console.log('Model loaded successfully')"
             >
-              <div slot="ar-button" style="display: none;"></div>
               <button 
+                slot="ar-button"
                 id="custom-ar-button"
                 style="position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); background: white; color: black; padding: 16px 32px; border-radius: 12px; border: none; font-weight: bold; font-size: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);"
               >
                 View in your space
               </button>
+              <style>
+                model-viewer::part(default-ar-button) {
+                  display: none;
+                }
+                #custom-ar-button {
+                  display: block !important;
+                }
+              </style>
               <div id="error-display" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,0,0,0.8); color: white; padding: 16px; border-radius: 8px; display: none; max-width: 80%; text-align: center;"></div>
             </model-viewer>
             <script>
@@ -77,20 +85,26 @@ export default function ARModelViewer({ product, onClose }: ARModelViewerProps) 
                 return (isIOS && isSafari) || (isAndroid && isChrome);
               }
               
-              // Custom AR button click handler - always visible
-              arButton.addEventListener('click', () => {
-                if (!isARSupported()) {
-                  alert('AR is not supported on this browser. Please use:\n\n• Safari on iPhone/iPad\n• Chrome on Android\n\nMake sure you\'re using HTTPS.');
-                  return;
-                }
+              // Override button visibility and add unsupported browser handling
+              setTimeout(() => {
+                // Force button to always be visible
+                arButton.style.display = 'block';
                 
-                // Activate AR on supported browsers
-                try {
-                  modelViewer.activateAR();
-                } catch (error) {
-                  alert('AR activation failed: ' + error.message);
-                }
-              });
+                // Add click handler for unsupported browsers only
+                const originalClick = arButton.onclick;
+                arButton.onclick = function(e) {
+                  if (!isARSupported()) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    alert('AR is not supported on this browser. Please use:\n\n• Safari on iPhone/iPad\n• Chrome on Android\n\nMake sure you\'re using HTTPS.');
+                    return false;
+                  }
+                  // Let model-viewer handle AR activation for supported browsers
+                  if (originalClick) {
+                    return originalClick.call(this, e);
+                  }
+                };
+              }, 500);
               
               modelViewer.addEventListener('error', (event) => {
                 const errorMsg = 'AR Model Error: ' + (event.detail?.message || 'Failed to load model');
