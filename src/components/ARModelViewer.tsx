@@ -53,6 +53,7 @@ export default function ARModelViewer({ product, onClose }: ARModelViewerProps) 
               onerror="alert('Model loading error: ' + event.detail || 'Unknown error')"
               onload="console.log('Model loaded successfully')"
             >
+              <div slot="ar-button" style="display: none;"></div>
               <button 
                 id="custom-ar-button"
                 style="position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); background: white; color: black; padding: 16px 32px; border-radius: 12px; border: none; font-weight: bold; font-size: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);"
@@ -76,29 +77,16 @@ export default function ARModelViewer({ product, onClose }: ARModelViewerProps) 
                 return (isIOS && isSafari) || (isAndroid && isChrome);
               }
               
-              // Custom AR button click handler
+              // Custom AR button click handler - always visible
               arButton.addEventListener('click', () => {
                 if (!isARSupported()) {
                   alert('AR is not supported on this browser. Please use:\n\n• Safari on iPhone/iPad\n• Chrome on Android\n\nMake sure you\'re using HTTPS.');
                   return;
                 }
                 
-                // Try to activate AR
+                // Activate AR on supported browsers
                 try {
-                  if (modelViewer.canActivateAR) {
-                    modelViewer.activateAR();
-                  } else {
-                    // Fallback: create download link for iOS
-                    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-                    if (isIOS) {
-                      const link = document.createElement('a');
-                      link.href = modelViewer.src;
-                      link.setAttribute('rel', 'ar');
-                      link.click();
-                    } else {
-                      alert('AR not available. Please ensure you have a compatible device and browser.');
-                    }
-                  }
+                  modelViewer.activateAR();
                 } catch (error) {
                   alert('AR activation failed: ' + error.message);
                 }
