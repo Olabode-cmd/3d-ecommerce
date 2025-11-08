@@ -21,26 +21,26 @@ export const products: Product[] = [
     inStock: true,
     rating: 4.5
   },
-  {
-    id: '2',
-    name: 'Gaming Office Chair',
-    description: 'High-performance gaming chair with lumbar support and adjustable height.',
-    price: 399.99,
-    images: [
-      '/images/product2/image1.png',
-      '/images/product2/image2.png',
-      '/images/product2/image3.png'
-    ],
-    modelPath: '/images/product2/office_chair_gaming_chair.glb',
-    category: 'Office',
-    dimensions: { width: 28, height: 48, depth: 32 },
-    weight: 35,
-    material: 'PU Leather & Mesh',
-    color: 'Black & Red',
-    features: ['Lumbar Support', 'Height Adjustable', '360° Swivel', 'Tilt Function'],
-    inStock: true,
-    rating: 4.7
-  },
+  // {
+  //   id: '2',
+  //   name: 'Gaming Office Chair',
+  //   description: 'High-performance gaming chair with lumbar support and adjustable height.',
+  //   price: 399.99,
+  //   images: [
+  //     '/images/product2/image1.png',
+  //     '/images/product2/image2.png',
+  //     '/images/product2/image3.png'
+  //   ],
+  //   modelPath: '/images/product2/office_chair_gaming_chair.glb',
+  //   category: 'Office',
+  //   dimensions: { width: 28, height: 48, depth: 32 },
+  //   weight: 35,
+  //   material: 'PU Leather & Mesh',
+  //   color: 'Black & Red',
+  //   features: ['Lumbar Support', 'Height Adjustable', '360° Swivel', 'Tilt Function'],
+  //   inStock: true,
+  //   rating: 4.7
+  // },
   {
     id: '3',
     name: 'Executive Office Chair',
